@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetails";
+}
+
+<h2>OrderDetails</h2>
+<table class="table table-bordered">
+    <tr class="btn-warning">
+        <th>ID</th>
+        <th>Food Type</th>
+        <th>Presarvation Time (Hour)</th>
+        <th>Packet Number</th>
+        <th>User ID</th>
+        <th>Assigned Staff ID</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Foodtype</td>
+            <td>@item.PreservationHour</td>
+            <td>@item.PacketCount</td>
+            <td>@item.RID</td>
+            <td>@item.Assign</td>
+        </tr>
+    }
+
+</table>
+<form method="post">
+    <fieldset>
+        <div class="form-group">
+            <label for="idnumber">ID Number</label>
+            <input class="form-control" type="text" id="id-number" name="idnumber" placeholder="Enter ID Number" required>
+            <label for="ordernumber">Order Number</label>
+            <input class="form-control" type="text" id="order-number" name="ordernumber" placeholder="Enter Order Number" required>
+        </div>
+        <button class="btn btn-success btn-block" type="submit">Submit</button>
+    </fieldset>
+</form>
