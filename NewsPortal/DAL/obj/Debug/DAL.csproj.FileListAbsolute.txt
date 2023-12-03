@@ -1,0 +1,12 @@
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\DAL.dll.config
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\DAL.dll
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\DAL.pdb
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\EntityFramework.dll
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\EntityFramework.xml
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\obj\Debug\DAL.csproj.CopyComplete
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\obj\Debug\DAL.dll
+G:\Advance-.NET-master\Advance-.NET-master\NewsPortal\DAL\obj\Debug\DAL.pdb
