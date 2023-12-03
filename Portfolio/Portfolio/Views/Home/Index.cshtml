@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <style>
+        #hero {
+            background-image: url('/Data/img/sachcha.png')!important;
+            background-repeat: no-repeat;
+            background-size:cover;
+        }
+    </style>
+</head>
+
+<body>
+<section  id="hero" class="d-flex flex-column justify-content-center">
+        @* <img src="~/Data/img/sachcha.png"/> *@
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+        <h2>SHARIAR MAHMUD SACHCHA</h2>
+        <p>I'm <span class="typed" data-typed-items="Web Developer,Designer, ,Freelancer, Photographer, Document Creator"></span></p>
+        <div class="social-links">
+                <a href="http://wa.me/qr/UZ2Q6V4ZGEQRE1" class=""><i class="bx bxl-whatsapp"></i></a>
+                <a href="https://www.facebook.com/shariarmahmud.sachcha" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://www.t.me/sm-sachcha" class="google-plus"><i class="bx bxl-telegram"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+    </div>
+</section>
+    <partial name="PartialAbout"/>
+    <partial name="PartialResume"/>
+    <partial name="PartialProject" />
+    <partial name="PartialContact" />
+</body>
