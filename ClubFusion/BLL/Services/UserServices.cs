@@ -31,11 +31,22 @@ namespace BLL.Services
             var data = Convert(user);
             return DataAccessLayer.UserContent().Update(data);
         }
-        public static int Delete(UserDTO user)
+        public static string Delete(UserDTO user)
         {
             var data = Convert(user);
-            return DataAccessLayer.UserContent().Delete(data);
+
+            var ManagersWithUser = DataAccessLayer.ClubManagerContent().GetAll().Where(cm => cm.UserId == data.Id).ToList();
+
+            if (ManagersWithUser.Any())
+            {
+                var failureMessage = "Failure due to reference";
+                return failureMessage;
+            }
+
+            DataAccessLayer.UserContent().Delete(data);
+            return "Delete successful";
         }
+
         static List<UserDTO> Convert(List<User> user)
         {
             var data = new List<UserDTO>();
