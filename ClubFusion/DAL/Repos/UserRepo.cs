@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    class UserRepo : Repository, IRepository<User, int, int, User>
+    class UserRepo : Repository, IRepository<User, int, int, User>, IAuthentication
     {
         public int Delete(User obj)
         {
@@ -43,6 +43,15 @@ namespace DAL.Repos
             data.UpdateTime = obj.UpdateTime;
             data.UserType = obj.UserType;
             return cfContext.SaveChanges();
+        }
+        public bool Auth(string phnNo, string pass)
+        {
+            var data = from u in cfContext.Users
+                       where u.PhoneNo.Equals(phnNo) &&
+                       u.Password.Equals(pass)
+                       select u;
+            if (data != null) return true;
+            return false;
         }
     }
 }

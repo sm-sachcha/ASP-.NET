@@ -147,6 +147,7 @@
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\UnitOfProduct.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Interface\IAuthentication.cs" />
     <Compile Include="Interface\IDept.cs" />
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Migrations\202312140626233_Alltables.cs" />

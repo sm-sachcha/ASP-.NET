@@ -47,12 +47,10 @@ namespace DAL
         {
             return new ProductGradeRepo();
         }
-
         public static IRepository<Club, int, int, Club> ClubContent()
         {
             return new ClubRepo();
         }
-
         public static IDept<ProductSize, int,int, ProductSize> ProductSizeContent()
         {
             return new ProductSizeRepo();
@@ -76,6 +74,10 @@ namespace DAL
         public static IRepository<MonitoringManager, int, int, MonitoringManager> MonitoringManagerContent()
         {
             return new MonitoringManagerRepo();
+        }
+        public static IAuthentication AuthData()
+        {
+            return new UserRepo();
         }
     }
 }
