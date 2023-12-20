@@ -24,9 +24,17 @@ namespace BLL.Services
         }
         public static int Add(ClubDTO club)
         {
+            var existingClub = DataAccessLayer.ClubContent().GetAll().FirstOrDefault(c => c.Name.Equals(club.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingClub != null)
+            {
+                throw new InvalidOperationException("Club with the same name already exists");
+            }
+
             var data = Convert(club);
             return DataAccessLayer.ClubContent().Insert(data);
         }
+
         public static int Delete(ClubDTO club)
         {
             var data = Convert(club);
@@ -34,9 +42,24 @@ namespace BLL.Services
         }
         public static int Edit(ClubDTO club)
         {
-            var data = Convert(club);
-            return DataAccessLayer.ClubContent().Update(data);
+            var existingClub = DataAccessLayer.ClubContent().GetById(club.Id);
+
+            if (existingClub == null)
+            {
+                throw new InvalidOperationException("Club not found for editing");
+            }
+
+            if (existingClub.isActive)
+            {
+                var data = Convert(club);
+                return DataAccessLayer.ClubContent().Update(data);
+            }
+            else
+            {
+                throw new InvalidOperationException("Edit can't be available for inactive user");
+            }
         }
+
 
         static List<ClubDTO> Convert(List<Club> club)
         {
