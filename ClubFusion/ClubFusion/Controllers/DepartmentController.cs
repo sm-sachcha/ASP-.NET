@@ -37,11 +37,16 @@ namespace ClubFusion.Controllers
                 var data = DepartmentServices.Add(department);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
         [HttpPost]
         [Route("api/dept/edit")]
         public HttpResponseMessage Edit(DepartmentDTO department)
@@ -51,11 +56,16 @@ namespace ClubFusion.Controllers
                 var data = DepartmentServices.Edit(department);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
+
 
         [HttpPost]
         [Route("api/dept/delete")]

@@ -52,6 +52,10 @@ namespace ClubFusion.Controllers
                 var data = DesignationServices.Add(designation);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
@@ -66,6 +70,10 @@ namespace ClubFusion.Controllers
             {
                 var data = DesignationServices.Edit(designation);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
             catch (Exception ex)
             {

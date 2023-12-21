@@ -23,6 +23,12 @@ namespace BLL.Services
         }
         public static int Add(DesignationDTO dto)
         {
+            var existingClub = DataAccessLayer.DesignationContent().GetAll().FirstOrDefault(c => c.Name.Equals(dto.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingClub != null)
+            {
+                throw new InvalidOperationException("Club with the same name already exists");
+            }
             var data = Convert(dto);
             return DataAccessLayer.DesignationContent().Insert(data);
         }
@@ -33,9 +39,18 @@ namespace BLL.Services
         }
         public static int Edit(DesignationDTO dto)
         {
+            var existingData = DataAccessLayer.DesignationContent().GetById(dto.Id);
+
+            if (existingData.IsActive && !dto.IsActive)
+            {
+                throw new InvalidOperationException("Cannot edit Inactive Designation.");
+            }
+
             var data = Convert(dto);
             return DataAccessLayer.DesignationContent().Update(data);
         }
+
+
         static List<Designation> Convert(List<DesignationDTO> nwz)
         {
             var data = new List<Designation>();

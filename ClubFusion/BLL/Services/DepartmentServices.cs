@@ -28,11 +28,24 @@ namespace BLL.Services
         }
         public static int Add(DepartmentDTO department)
         {
+            var existingClub = DataAccessLayer.DepartmentContent().GetAll().FirstOrDefault(c => c.Name.Equals(department.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingClub != null)
+            {
+                throw new InvalidOperationException("Club with the same name already exists");
+            }
+
             var data = Convert(department);
             return DataAccessLayer.DepartmentContent().Insert(data);
         }
+
         public static int Edit(DepartmentDTO department)
         {
+            if (!department.isActive)
+            {
+                throw new InvalidOperationException("Can't edit an inactive department.");
+            }
+
             var data = Convert(department);
             return DataAccessLayer.DepartmentContent().Update(data);
         }

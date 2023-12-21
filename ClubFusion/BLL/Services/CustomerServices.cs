@@ -29,6 +29,11 @@ namespace BLL.Services
         }
         public static int Edit(CustomerDTO customer)
         {
+            if (!customer.isActive)
+            {
+                throw new InvalidOperationException("Inactive customers cannot be edited.");
+            }
+
             var data = Convert(customer);
             return DataAccessLayer.CustomerContent().Update(data);
         }

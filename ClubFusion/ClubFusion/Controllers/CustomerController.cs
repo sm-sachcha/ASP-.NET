@@ -57,9 +57,9 @@ namespace ClubFusion.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
+
         [HttpPost]
         [Route("api/customer/edit")]
-
         public HttpResponseMessage Edit(CustomerDTO customer)
         {
             try
@@ -67,11 +67,16 @@ namespace ClubFusion.Controllers
                 var data = CustomerServices.Edit(customer);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
+
         [HttpPost]
         [Route("api/customer/delete")]
 

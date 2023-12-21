@@ -40,6 +40,8 @@ namespace BLL.Services
             var data = Convert(club);
             return DataAccessLayer.ClubContent().Delete(data);
         }
+
+
         public static int Edit(ClubDTO club)
         {
             var existingClub = DataAccessLayer.ClubContent().GetById(club.Id);
@@ -51,15 +53,21 @@ namespace BLL.Services
 
             if (existingClub.isActive)
             {
-                var data = Convert(club);
-                return DataAccessLayer.ClubContent().Update(data);
+                if (club.UpdateBy == 0 || club.UpdateBy == null)
+                {
+                    var data = Convert(club);
+                    return DataAccessLayer.ClubContent().Update(data);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Only Admin can edit the Club");
+                }
             }
             else
             {
-                throw new InvalidOperationException("Edit can't be available for inactive user");
+                throw new InvalidOperationException("Inactive Club can't be edited");
             }
         }
-
 
         static List<ClubDTO> Convert(List<Club> club)
         {
