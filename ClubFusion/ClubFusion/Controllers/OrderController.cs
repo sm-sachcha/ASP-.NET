@@ -50,11 +50,16 @@ namespace ClubFusion.Controllers
                 var data = OrderServices.Add(order);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (InvalidOperationException ex)
+            {
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
         [HttpPost]
         [Route("api/order/edit")]
         public HttpResponseMessage Edit(OrderDTO order)

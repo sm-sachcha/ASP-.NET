@@ -51,23 +51,22 @@ namespace BLL.Services
                 throw new InvalidOperationException("Club not found for editing");
             }
 
-            if (existingClub.isActive)
+            if (club.UpdateBy == 0 || club.UpdateBy == null)
             {
-                if (club.UpdateBy == 0 || club.UpdateBy == null)
-                {
-                    var data = Convert(club);
-                    return DataAccessLayer.ClubContent().Update(data);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Only Admin can edit the Club");
-                }
+                var data = Convert(club);
+                return DataAccessLayer.ClubContent().Update(data);
             }
             else
+            {
+                throw new InvalidOperationException("Only Admin can edit the Club");
+            }
+
+            if (!existingClub.isActive)
             {
                 throw new InvalidOperationException("Inactive Club can't be edited");
             }
         }
+
 
         static List<ClubDTO> Convert(List<Club> club)
         {

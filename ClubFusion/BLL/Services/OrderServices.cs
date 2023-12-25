@@ -23,6 +23,10 @@ namespace BLL.Services
         }
         public static int Add(OrderDTO odr)
         {
+            if (odr.UpdateBy != 3)
+            {
+                throw new InvalidOperationException("Only Customer can add orders.");
+            }
             var data = Convert(odr);
             return DataAccessLayer.OrderContent().Insert(data);
         }

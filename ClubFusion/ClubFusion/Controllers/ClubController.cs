@@ -104,6 +104,7 @@ namespace ClubFusion.Controllers
 
 
 
+
         [HttpPost]
         [Route("api/club/delete")]
         public HttpResponseMessage Delete(ClubDTO club)
