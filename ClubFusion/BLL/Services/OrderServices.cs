@@ -41,6 +41,15 @@ namespace BLL.Services
             return DataAccessLayer.OrderContent().Delete(data);
         }
 
+       /* private static string GenerateOrderNumber()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var orderNumber = new string(Enumerable.Repeat(chars, 10)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            return orderNumber;
+        }*/
+
         static List<OrderDTO> Convert(List<Order> odr)
         {
             var data = new List<OrderDTO>();
