@@ -27,7 +27,7 @@ namespace BLL.Services
 
             if (existingClub != null)
             {
-                throw new InvalidOperationException("Club with the same name already exists");
+                throw new InvalidOperationException("Designation with the same name already exists");
             }
             var data = Convert(dto);
             return DataAccessLayer.DesignationContent().Insert(data);

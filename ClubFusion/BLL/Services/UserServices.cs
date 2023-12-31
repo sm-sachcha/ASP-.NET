@@ -44,7 +44,7 @@ namespace BLL.Services
             }
 
             DataAccessLayer.UserContent().Delete(data);
-            return "Delete successful";
+            return "Data Deleted successfully";
         }
 
         static List<UserDTO> Convert(List<User> user)

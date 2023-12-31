@@ -43,7 +43,6 @@ namespace ClubFusion.Controllers
             }
         }
 
-
         [HttpPost]
         [Route("api/location/add")]
         public HttpResponseMessage Add(LocationDTO Location)
@@ -53,9 +52,17 @@ namespace ClubFusion.Controllers
                 var data = LocationServices.Add(Location);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (ArgumentException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
@@ -68,9 +75,17 @@ namespace ClubFusion.Controllers
                 var data = LocationServices.Edit(Location);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
+            catch (ArgumentException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 

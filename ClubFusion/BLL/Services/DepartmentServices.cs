@@ -32,7 +32,7 @@ namespace BLL.Services
 
             if (existingClub != null)
             {
-                throw new InvalidOperationException("Club with the same name already exists");
+                throw new InvalidOperationException("Department with the same name already exists");
             }
 
             var data = Convert(department);

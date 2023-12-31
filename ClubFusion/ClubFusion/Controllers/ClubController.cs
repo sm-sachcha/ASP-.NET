@@ -63,8 +63,6 @@ namespace ClubFusion.Controllers
             }
         }
 
-
-
         [HttpPost]
         [Route("api/club/edit")]
         public HttpResponseMessage Edit(ClubDTO club)
@@ -98,11 +96,6 @@ namespace ClubFusion.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
-
-
-
-
-
 
 
         [HttpPost]

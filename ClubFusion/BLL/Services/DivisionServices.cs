@@ -23,6 +23,12 @@ namespace BLL.Services
         }
         public static int Add(DivisionDTO dto)
         {
+            var existingDivision = DataAccessLayer.DivisionContent().GetAll().FirstOrDefault(c => c.Name.Equals(dto.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingDivision != null)
+            {
+                throw new InvalidOperationException("Division with the same name already exists");
+            }
             var data = Convert(dto);
             return DataAccessLayer.DivisionContent().Insert(data);
         }
@@ -33,9 +39,24 @@ namespace BLL.Services
         }
         public static int Edit(DivisionDTO dto)
         {
-            var data = Convert(dto);
-            return DataAccessLayer.DivisionContent().Update(data);
+            var existingDiv = DataAccessLayer.DivisionContent().GetById(dto.Id);
+
+            if (existingDiv == null)
+            {
+                throw new InvalidOperationException("Division not found for editing");
+            }
+
+            if (dto.UpdateBy == 1 || dto.UpdateBy == 2 || dto.UpdateBy == null || dto.UpdateBy == 0)
+            {
+                var data = Convert(dto);
+                return DataAccessLayer.DivisionContent().Update(data);
+            }
+            else
+            {
+                throw new InvalidOperationException("Employee & Monitoring Manager can edit the Division");
+            }
         }
+
         static List<Division> Convert(List<DivisionDTO> nwz)
         {
             var data = new List<Division>();

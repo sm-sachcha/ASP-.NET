@@ -22,20 +22,46 @@ namespace BLL.Services
             var data = DataAccessLayer.LocationContent().GetById(id);
             return Convert(data);
         }
-        public static int Add(LocationDTO Location)
+        public static int Add(LocationDTO loc)
         {
-            var data = Convert(Location);
+            var existingClub = DataAccessLayer.LocationContent().GetAll().FirstOrDefault(c => c.Name.Equals(loc.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingClub != null)
+            {
+                throw new InvalidOperationException("Location with the same name already exists");
+            }
+
+            var data = Convert(loc);
             return DataAccessLayer.LocationContent().Insert(data);
         }
+
         public static int Delete(LocationDTO Location)
         {
             var data = Convert(Location);
             return DataAccessLayer.LocationContent().Delete(data);
         }
-        public static int Edit(LocationDTO club)
+        public static int Edit(LocationDTO loc)
         {
-            var data = Convert(club);
-            return DataAccessLayer.LocationContent().Update(data);
+            var existingClub = DataAccessLayer.LocationContent().GetById(loc.Id);
+
+            if (existingClub == null)
+            {
+                throw new InvalidOperationException("Location not found for editing");
+            }
+
+            if (loc.UpdateBy == 0 || loc.UpdateBy == null)
+            {
+                var data = Convert(loc);
+                return DataAccessLayer.LocationContent().Update(data);
+            }
+            if (!existingClub.isActive)
+            {
+                throw new InvalidOperationException("Only Admin can edit InActive location");
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid operation");
+            }
         }
 
         static List<LocationDTO> Convert(List<Location> club)
