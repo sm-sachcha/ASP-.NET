@@ -56,17 +56,15 @@ namespace BLL.Services
                 var data = Convert(club);
                 return DataAccessLayer.ClubContent().Update(data);
             }
-            else
-            {
-                throw new InvalidOperationException("Only Admin can edit the Club");
-            }
-
             if (!existingClub.isActive)
             {
                 throw new InvalidOperationException("Inactive Club can't be edited");
             }
+            else
+            {
+                throw new InvalidOperationException("Only Admin can edit the Club");
+            }
         }
-
 
         static List<ClubDTO> Convert(List<Club> club)
         {
@@ -77,7 +75,6 @@ namespace BLL.Services
             }
             return data;
         }
-
         static List<Club> Convert(List<ClubDTO> club)
         {
             var data = new List<Club>();
@@ -87,7 +84,6 @@ namespace BLL.Services
             }
             return data;
         }
-
         static Club Convert(ClubDTO club)
         {
             return new Club()
